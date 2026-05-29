@@ -4,40 +4,48 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   
-  /* Premium Wellness Palette */
-  --color-wellness-50: #f2f7f5;
-  --color-wellness-100: #e0eee8;
-  --color-wellness-200: #c2ddd2;
-  --color-wellness-300: #9bc6b5;
-  --color-wellness-400: #71ab96;
-  --color-wellness-500: #518e78;
-  --color-wellness-600: #3f7060;
-  --color-wellness-700: #345a4e;
-  --color-wellness-800: #2b4941;
-  --color-wellness-900: #253d37;
+  --color-wellness-50: var(--tw-wellness-50);
+  --color-wellness-100: var(--tw-wellness-100);
+  --color-wellness-200: var(--tw-wellness-200);
+  --color-wellness-300: var(--tw-wellness-300);
+  --color-wellness-400: var(--tw-wellness-400);
+  --color-wellness-500: var(--tw-wellness-500);
+  --color-wellness-600: var(--tw-wellness-600);
+  --color-wellness-700: var(--tw-wellness-700);
+  --color-wellness-800: var(--tw-wellness-800);
+  --color-wellness-900: var(--tw-wellness-900);
 
-  /* Earthy Accents */
-  --color-earth-50: #faf7f2;
-  --color-earth-100: #f2ebe0;
-  --color-earth-200: #e5d5c0;
-  --color-earth-300: #d4ba9b;
-  --color-earth-400: #c49d76;
-  --color-earth-500: #b48157;
+  --color-earth-50: var(--tw-earth-50);
+  --color-earth-100: var(--tw-earth-100);
+  --color-earth-200: var(--tw-earth-200);
+  --color-earth-300: var(--tw-earth-300);
+  --color-earth-400: var(--tw-earth-400);
+  --color-earth-500: var(--tw-earth-500);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
-  --background: #faf7f2; /* Soft earthy background */
-  --foreground: #253d37; /* Dark wellness green for text */
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #111a17; /* Deep wellness dark */
-    --foreground: #f2ebe0; /* Soft earthy text */
-  }
+  /* Fallback values for Theme 1 */
+  --background: #faf7f2;
+  --foreground: #253d37;
+  --tw-wellness-50: #f2f7f5;
+  --tw-wellness-100: #e0eee8;
+  --tw-wellness-200: #c2ddd2;
+  --tw-wellness-300: #9bc6b5;
+  --tw-wellness-400: #71ab96;
+  --tw-wellness-500: #518e78;
+  --tw-wellness-600: #3f7060;
+  --tw-wellness-700: #345a4e;
+  --tw-wellness-800: #2b4941;
+  --tw-wellness-900: #253d37;
+  --tw-earth-50: #faf7f2;
+  --tw-earth-100: #f2ebe0;
+  --tw-earth-200: #e5d5c0;
+  --tw-earth-300: #d4ba9b;
+  --tw-earth-400: #c49d76;
+  --tw-earth-500: #b48157;
 }
 
 body {
@@ -48,30 +56,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom utility classes */
 @utility glass {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-@utility glass-dark {
-  background: rgba(17, 26, 23, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @utility text-gradient {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(to right, var(--color-wellness-600), var(--color-earth-500));
-}
-
-.dark .text-gradient {
-  background-image: linear-gradient(to right, var(--color-wellness-300), var(--color-earth-300));
+  background-image: linear-gradient(to right, var(--color-wellness-600), var(--color-wellness-400));
 }
 
 @keyframes fade-in-up {

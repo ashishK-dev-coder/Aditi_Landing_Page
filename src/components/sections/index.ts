@@ -1,0 +1,10 @@
+export { default as Navbar } from "./Navbar";
+export { default as HeroSection } from "./HeroSection";
+export { default as VSLVideoSection } from "./VSLVideoSection";
+export { default as TestimonialSection } from "./TestimonialSection";
+export { default as VideoTestimonialSection } from "./VideoTestimonialSection";
+export { default as WellnessKitSection } from "./WellnessKitSection";
+export { default as HowItWorksSection } from "./HowItWorksSection";
+export { default as TeamSection } from "./TeamSection";
+export { default as CTASection } from "./CTASection";
+export { default as Footer } from "./Footer";

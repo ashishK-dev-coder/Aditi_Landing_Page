@@ -5,6 +5,14 @@ import themes from "../visual-data/themes.json";
 
 type Theme = typeof themes[0];
 
+function isDarkTheme(background: string) {
+  const hex = background.replace("#", "");
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255 < 0.5;
+}
+
 interface ThemeContextType {
   activeTheme: Theme;
   setActiveTheme: (id: string) => void;
@@ -36,11 +44,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const darkTheme = isDarkTheme(activeTheme.background);
+  const footerBg = darkTheme
+    ? activeTheme.wellness["50"]
+    : activeTheme.wellness["100"];
+  const footerText = darkTheme ? "#ffffff" : "#111827";
+
   const cssVariables = mounted
     ? `
     :root {
       --background: ${activeTheme.background};
       --foreground: ${activeTheme.foreground};
+      --footer-bg: ${footerBg};
+      --footer-text: ${footerText};
       --tw-wellness-50: ${activeTheme.wellness["50"]};
       --tw-wellness-100: ${activeTheme.wellness["100"]};
       --tw-wellness-200: ${activeTheme.wellness["200"]};

@@ -21,27 +21,18 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [activeTheme, setActiveThemeState] = useState<Theme>(themes[0]);
+export function ThemeProvider({ children, initialThemeId }: { children: React.ReactNode, initialThemeId?: string | null }) {
+  const activeTheme = themes[0];
   const [mounted, setMounted] = useState(false);
 
-  // Defer theme hydration to avoid SSR/client mismatch from localStorage.
+  // Hydration sync
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional mount gate for client-only theme
     setMounted(true);
-    const saved = localStorage.getItem("aditi-theme-id");
-    if (saved) {
-      const found = themes.find((t) => t.id === saved);
-      if (found) setActiveThemeState(found);
-    }
   }, []);
 
   const setActiveTheme = (id: string) => {
-    const found = themes.find((t) => t.id === id);
-    if (found) {
-      setActiveThemeState(found);
-      localStorage.setItem("aditi-theme-id", id);
-    }
+    // Theme changing is disabled by the user
   };
 
   const darkTheme = isDarkTheme(activeTheme.background);

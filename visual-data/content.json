@@ -1,0 +1,322 @@
+{
+  "_note": "Edit this file to change all website copy. Save and refresh the page to see updates.",
+  "site": {
+    "consultationAnchor": "#consultation",
+    "bookUrl": "#consultation"
+  },
+  "navbar": {
+    "logoUrl": "/images/logo/logo.png",
+    "brandPrimary": "FitLife",
+    "brandAccent": "Studio",
+    "ctaText": "Book Consultation"
+  },
+  "hero": {
+    "headingGradient": "Fix Your Gut.",
+    "headingRest": "Transform Your Weight.",
+    "subheading": "Support your body naturally with a personalized gut wellness and weight management approach.",
+    "benefits": [
+      "Reduce Bloating",
+      "Improve Digestion",
+      "Support Healthy Weight Loss",
+      "Feel More Active & Confident"
+    ],
+    "ctaText": "Book Consultation Now",
+    "imageUrl": "/images/hero/lifestyle_wellness_1780074407043.png",
+    "imageAlt": "Healthy Lifestyle",
+    "badgeImageUrl": "/images/hero/gut_health_1780074429411.png",
+    "badgeImageAlt": "Gut Health",
+    "badgeTitle": "Natural Healing",
+    "badgeSubtitle": "Targeting the root cause",
+    "imageOrientation": "vertical"
+  },
+  "vsl": {
+    "headingLine1": "Discover The",
+    "headingGradient": "Real Reason",
+    "headingLine2": "Behind Stubborn Weight & Gut Issues",
+    "videoThumbnailUrl": "/images/gut_health_1780074429411.png",
+    "videoThumbnailAlt": "Video Thumbnail",
+    "tagsLabel": "Learn how gut imbalance may affect:",
+    "tags": [
+      "Weight gain",
+      "Low energy",
+      "Digestion",
+      "Cravings",
+      "Bloating"
+    ],
+    "subtext": "And discover a wellness-focused approach designed to support your body naturally.",
+    "ctaText": "Watch & Book Consultation",
+    "imageOrientation": "vertical",
+    "imageScale": 100
+  },
+  "testimonials": {
+    "heading": "Real Client Transformations",
+    "subheading": "See how fixing the gut changes everything.",
+    "items": [
+      {
+        "imageUrl": "/images/testimonials/1.png",
+        "imageAlt": "Testimonial 1",
+        "quote": "Client testimonial 1",
+        "showBeforeAfter": false,
+        "beforeLabel": "Before",
+        "afterLabel": "After"
+      },
+      {
+        "imageUrl": "/images/testimonials/2.png",
+        "imageAlt": "Testimonial 2",
+        "quote": "Client testimonial 2",
+        "showBeforeAfter": false,
+        "beforeLabel": "Before",
+        "afterLabel": "After"
+      },
+      {
+        "imageUrl": "/images/testimonials/3.png",
+        "imageAlt": "Testimonial 3",
+        "quote": "Client testimonial 3",
+        "showBeforeAfter": false,
+        "beforeLabel": "Before",
+        "afterLabel": "After"
+      },
+      {
+        "imageUrl": "/images/testimonials/4.jpg",
+        "imageAlt": "Testimonial 4",
+        "quote": "Client testimonial 4",
+        "showBeforeAfter": false,
+        "beforeLabel": "Before",
+        "afterLabel": "After"
+      },
+      {
+        "imageUrl": "/images/testimonials/5.jpg",
+        "imageAlt": "Testimonial 5",
+        "quote": "Client testimonial 5",
+        "showBeforeAfter": false,
+        "beforeLabel": "Before",
+        "afterLabel": "After"
+      },
+      {
+        "imageUrl": "/images/testimonials/6.png",
+        "imageAlt": "Testimonial 6",
+        "quote": "Client testimonial 6",
+        "showBeforeAfter": false,
+        "beforeLabel": "Before",
+        "afterLabel": "After"
+      },
+      {
+        "imageUrl": "/images/testimonials/7.png",
+        "imageAlt": "Testimonial 7",
+        "quote": "Client testimonial 7",
+        "showBeforeAfter": false,
+        "beforeLabel": "Before",
+        "afterLabel": "After"
+      },
+      {
+        "imageUrl": "/images/testimonials/8.jpg",
+        "imageAlt": "Testimonial 8",
+        "quote": "Client testimonial 8",
+        "showBeforeAfter": false,
+        "beforeLabel": "Before",
+        "afterLabel": "After"
+      }
+    ],
+    "imageOrientation": "vertical",
+    "imageScale": 100
+  },
+  "videoTestimonials": {
+    "badge": "Video Testimonials",
+    "headingLine1": "Hear It Straight from",
+    "headingGradient": "Our Clients!",
+    "subheading": "Real stories. Real results. Watch their transformation journeys.",
+    "brandPrimary": "Aditi",
+    "brandAccent": "Wellness",
+    "sponsoredLabel": "Sponsored",
+    "items": [
+      {
+        "id": 1,
+        "name": "Client 1",
+        "location": "India",
+        "quote": "Amazing results 1",
+        "thumbnail": "/images/videoTestimonials/gut_health_1780074429411.png",
+        "videoUrl": "/images/videoTestimonials/1.mp4"
+      },
+      {
+        "id": 2,
+        "name": "Client 2",
+        "location": "India",
+        "quote": "Amazing results 2",
+        "thumbnail": "/images/videoTestimonials/lifestyle_wellness_1780074407043.png",
+        "videoUrl": "/images/videoTestimonials/2.mp4"
+      }
+    ]
+  },
+  "screenshots": {
+    "badge": "Screenshot Section",
+    "headingLine1": "Hear It Straight from",
+    "headingGradient": "Our Clients!",
+    "subheading": "Real stories. Real results. Watch their transformation journeys.",
+    "brandPrimary": "Aditi",
+    "brandAccent": "Wellness",
+    "sponsoredLabel": "Sponsored",
+    "items": [
+      {
+        "id": 1,
+        "name": "Screenshot 1",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/IMG-20260526-WA0054.jpg"
+      },
+      {
+        "id": 2,
+        "name": "Screenshot 2",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/IMG-20260526-WA0112.jpg"
+      },
+      {
+        "id": 3,
+        "name": "Screenshot 3",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/IMG-20260602-WA0064.jpg"
+      },
+      {
+        "id": 4,
+        "name": "Screenshot 4",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/IMG-20260602-WA0065.jpg"
+      },
+      {
+        "id": 5,
+        "name": "Screenshot 5",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/IMG-20260602-WA0068.jpg"
+      },
+      {
+        "id": 6,
+        "name": "Screenshot 6",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/IMG-20260602-WA0069.jpg"
+      },
+      {
+        "id": 7,
+        "name": "Screenshot 7",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/IMG-20260602-WA0070.jpg"
+      },
+      {
+        "id": 8,
+        "name": "Screenshot 8",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/IMG-20260602-WA0071.jpg"
+      },
+      {
+        "id": 9,
+        "name": "Screenshot 9",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/IMG-20260602-WA0072.jpg"
+      },
+      {
+        "id": 10,
+        "name": "Screenshot 10",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/IMG-20260602-WA0074.jpg"
+      },
+      {
+        "id": 11,
+        "name": "Screenshot 11",
+        "location": "",
+        "quote": "",
+        "thumbnail": "/images/screenshots/WA_1780374304274.jpeg"
+      }
+    ]
+  },
+  "wellnessKit": {
+    "heading": "Wellness Support Kit",
+    "subheading": "Everything you need to support your gut, manage weight, and feel your best every single day.",
+    "imageUrl": "/images/wellnesskit/product_kit_1780074391931.png",
+    "imageAlt": "Wellness Support Kit",
+    "highlights": [
+      "Gut Health Support",
+      "Lifestyle Wellness Support",
+      "Daily Routine Friendly",
+      "Designed For Wellness Journey"
+    ],
+    "ctaText": "Talk To Expert"
+  },
+  "howItWorks": {
+    "heading": "Simple 3-Step Process",
+    "steps": [
+      {
+        "step": "1",
+        "title": "Book Consultation",
+        "desc": "Speak with our wellness expert."
+      },
+      {
+        "step": "2",
+        "title": "Personalized Assessment",
+        "desc": "Understand your gut & lifestyle challenges."
+      },
+      {
+        "step": "3",
+        "title": "Start Your Journey",
+        "desc": "Get expert guidance and personalized support."
+      }
+    ]
+  },
+  "team": {
+    "heading": "Meet Our Team",
+    "subheading": "The experts behind your wellness transformation.",
+    "members": [
+      {
+        "name": "Dr Anmol Rattan",
+        "role": "Team Member",
+        "imageUrl": "/images/team/Dr Anmol Rattan.jpg",
+        "imageFit": "cover"
+      },
+      {
+        "name": "Dr Sandeep Garg",
+        "role": "Team Member",
+        "imageUrl": "/images/team/Dr Sandeep Garg.jpg"
+      },
+      {
+        "name": "Dt",
+        "role": "Team Member",
+        "imageUrl": "/images/team/Dt. Harshita Jain.jpg"
+      },
+      {
+        "name": "Nt",
+        "role": "Team Member",
+        "imageUrl": "/images/team/Nt. Poonam Chauhan.jpg"
+      },
+      {
+        "name": "Shilpa Baweja ",
+        "role": "Team Member",
+        "imageUrl": "/images/team/Shilpa Baweja .jpg"
+      },
+      {
+        "name": "Sonia Bathla",
+        "role": "Team Member",
+        "imageUrl": "/images/team/Sonia Bathla.jpg"
+      }
+    ]
+  },
+  "cta": {
+    "headingLine1": "Start Your Gut Wellness",
+    "headingLine2": "Journey Today",
+    "subheading": "Take the first step toward feeling lighter, healthier, and more confident.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "submitText": "Book Consultation"
+  },
+  "footer": {
+    "brand": "Aditi Wellness",
+    "copyrightSuffix": "All rights reserved."
+  }
+}

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
+import { EditableSection, EditableText, EditableImage, useEditableCardList, DraggableItem, CardRemoveButton, useDragReorder, useEditMode } from "@/components/visual-editor";
+import { useVisualContent } from "@/components/ContentProvider";
 
 interface Testimonial {
   id: number;
@@ -12,50 +13,79 @@ interface Testimonial {
   videoUrl?: string;
 }
 
-const testimonials: Testimonial[] = [
+const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
     name: "Sneha Gupta",
     location: "Mumbai",
     quote: "Lost 12kg in 3 months — my energy is through the roof!",
-    thumbnail: "/images/testimonial_1_1780074444196.png",
+    thumbnail: "/images/videoTestimonials/testimonial_1_1780074444196.png",
+    videoUrl: ""
   },
   {
     id: 2,
     name: "Rahul Verma",
     location: "Delhi",
     quote: "No more bloating. I finally feel comfortable in my own skin.",
-    thumbnail: "/images/before_after_1780074487458.png",
+    thumbnail: "/images/videoTestimonials/before_after_1780074487458.png",
+    videoUrl: ""
   },
   {
     id: 3,
     name: "Priya Nair",
     location: "Bangalore",
     quote: "The gut wellness plan changed my relationship with food.",
-    thumbnail: "/images/testimonial_2_1780074466194.png",
+    thumbnail: "/images/videoTestimonials/testimonial_2_1780074466194.png",
+    videoUrl: ""
   },
   {
     id: 4,
     name: "Amit Sharma",
     location: "Pune",
     quote: "Better sleep, better digestion, better life!",
-    thumbnail: "/images/lifestyle_wellness_1780074407043.png",
+    thumbnail: "/images/videoTestimonials/lifestyle_wellness_1780074407043.png",
+    videoUrl: ""
   },
   {
     id: 5,
     name: "Kavita Reddy",
     location: "Hyderabad",
     quote: "I wish I had found AditiWellness sooner. Truly life-changing.",
-    thumbnail: "/images/gut_health_1780074429411.png",
+    thumbnail: "/images/videoTestimonials/gut_health_1780074429411.png",
+    videoUrl: ""
   },
 ];
 
 export default function VideoTestimonialSection() {
+  const vt = useVisualContent().videoTestimonials ?? {};
+  
+  const {
+    items: editableTestimonials,
+    addCard,
+    removeAt,
+    reorderAt,
+  } = useEditableCardList({
+    path: "videoTestimonials.items",
+    sourceItems: vt.items,
+    defaultItems: DEFAULT_TESTIMONIALS,
+    createItem: () => ({
+      id: Date.now(),
+      name: "New Client",
+      location: "City",
+      quote: "New testimonial quote",
+      thumbnail: "/images/videoTestimonials/lifestyle_wellness_1780074407043.png",
+      videoUrl: ""
+    }),
+  });
+
   const [activeVideo, setActiveVideo] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+
+  const { isEditMode } = useEditMode();
+  const { dragIndex, dropIndex, startDrag, setDropTarget, finishDrag } = useDragReorder(reorderAt);
 
   const cardWidth = 280;
   const cardGap = 24;
@@ -71,27 +101,23 @@ export default function VideoTestimonialSection() {
 
   // Auto-carousel
   useEffect(() => {
-    if (isHovered || activeVideo !== null) return;
+    if (isHovered || activeVideo !== null || editableTestimonials.length === 0) return;
 
-    autoplayRef.current = setInterval(() => {
-      setCurrentIndex((prev) => {
-        const next = (prev + 1) % testimonials.length;
-        scrollToIndex(next);
-        return next;
-      });
+    const timer = setTimeout(() => {
+      const next = (currentIndex + 1) % editableTestimonials.length;
+      setCurrentIndex(next);
+      scrollToIndex(next);
     }, 3000);
 
-    return () => {
-      if (autoplayRef.current) clearInterval(autoplayRef.current);
-    };
-  }, [isHovered, activeVideo, scrollToIndex]);
+    return () => clearTimeout(timer);
+  }, [isHovered, activeVideo, scrollToIndex, currentIndex, editableTestimonials.length]);
 
   // Sync scroll position to currentIndex
   const handleScroll = () => {
     if (!scrollRef.current) return;
     const scrollLeft = scrollRef.current.scrollLeft;
     const index = Math.round(scrollLeft / (cardWidth + cardGap));
-    if (index !== currentIndex && index >= 0 && index < testimonials.length) {
+    if (index !== currentIndex && index >= 0 && index < editableTestimonials.length) {
       setCurrentIndex(index);
     }
   };
@@ -107,13 +133,13 @@ export default function VideoTestimonialSection() {
   };
 
   const scrollNext = () => {
-    const next = Math.min(testimonials.length - 1, currentIndex + 1);
+    const next = Math.min(editableTestimonials.length - 1, currentIndex + 1);
     setCurrentIndex(next);
     scrollToIndex(next);
   };
 
   return (
-    <section className="py-24 px-6 overflow-hidden bg-gradient-to-b from-wellness-50/50 to-background">
+    <EditableSection sectionId="videoTestimonials" label="Video Testimonials" className="py-24 px-6 overflow-hidden bg-gradient-to-b from-wellness-50/50 to-background">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
@@ -121,14 +147,18 @@ export default function VideoTestimonialSection() {
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>
-            Video Testimonials
+            <EditableText path="videoTestimonials.badge" fallback={vt.badge ?? "Video Testimonials"} />
           </div>
           <h2 className="font-heading text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-            Hear It Straight from <span className="text-gradient">Our Clients!</span>
+            <EditableText path="videoTestimonials.headingLine1" fallback={vt.headingLine1 ?? "Hear It Straight from"} />{" "}
+            <EditableText path="videoTestimonials.headingGradient" fallback={vt.headingGradient ?? "Our Clients!"} className="text-gradient" />
           </h2>
-          <p className="text-lg text-wellness-800/70 max-w-xl mx-auto">
-            Real stories. Real results. Watch their transformation journeys.
-          </p>
+          <EditableText
+            path="videoTestimonials.subheading"
+            fallback={vt.subheading ?? "Real stories. Real results. Watch their transformation journeys."}
+            className="text-lg text-wellness-800/70 max-w-xl mx-auto block"
+            multiline
+          />
         </div>
 
         {/* Carousel */}
@@ -151,14 +181,22 @@ export default function VideoTestimonialSection() {
           <button
             onClick={scrollNext}
             aria-label="Next testimonial"
-            className="absolute -right-2 md:right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-background/90 backdrop-blur-sm shadow-xl border border-wellness-200 flex items-center justify-center text-wellness-700 hover:bg-wellness-50 hover:scale-110 transition-all disabled:opacity-30 disabled:pointer-events-none"
-            disabled={currentIndex === testimonials.length - 1}
+            className="absolute -right-2 md:right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-wellness-100 text-wellness-800 hover:bg-wellness-50 hover:-translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+            disabled={currentIndex === editableTestimonials.length - 1}
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </button>
-
+          
+          {isEditMode && (
+          <div className="flex justify-center mt-12 relative z-20">
+            <button onClick={() => addCard()} className="editor-btn">
+              + Add Video Testimonial
+            </button>
+          </div>
+        )}
+          
           {/* Scrollable Cards */}
           <div
             ref={scrollRef}
@@ -169,12 +207,24 @@ export default function VideoTestimonialSection() {
               msOverflowStyle: "none",
             }}
           >
-            {testimonials.map((item) => (
-              <div
-                key={item.id}
-                className="flex-shrink-0 snap-center"
+            {editableTestimonials.map((item, i) => (
+              <DraggableItem
+                key={item.id || i}
+                index={i}
+                total={editableTestimonials.length}
+                enabled={isEditMode}
+                isDragging={dragIndex === i}
+                isDropTarget={dropIndex === i}
+                onDragStart={() => startDrag(i)}
+                onDragOver={() => setDropTarget(i)}
+                onDragEnd={finishDrag}
+                onDrop={finishDrag}
+                onMoveEarlier={() => reorderAt(i, i - 1)}
+                onMoveLater={() => reorderAt(i, i + 1)}
+                className="flex-shrink-0 snap-center relative group/card"
                 style={{ width: `${cardWidth}px` }}
               >
+                {isEditMode && <CardRemoveButton onRemove={() => removeAt(i)} className="absolute top-3 right-3 z-40" />}
                 <div
                   className={`relative rounded-[1.75rem] overflow-hidden shadow-xl border-2 transition-all duration-500 cursor-pointer group ${
                     activeVideo === item.id
@@ -191,33 +241,45 @@ export default function VideoTestimonialSection() {
                         <span className="text-white font-heading font-bold text-xs">A</span>
                       </div>
                       <div>
-                        <p className="text-white font-heading font-bold text-sm tracking-tight leading-none">
-                          Aditi<span className="text-earth-300">Wellness</span>
+                        <p className="text-white font-heading font-bold text-sm tracking-tight leading-none flex gap-1">
+                          <EditableText path="videoTestimonials.brandPrimary" fallback={vt.brandPrimary ?? "Aditi"} />
+                          <EditableText path="videoTestimonials.brandAccent" fallback={vt.brandAccent ?? "Wellness"} className="text-earth-300" />
                         </p>
-                        <p className="text-white/60 text-[10px] mt-0.5">Sponsored</p>
+                        <EditableText path="videoTestimonials.sponsoredLabel" fallback={vt.sponsoredLabel ?? "Sponsored"} className="text-white/60 text-[10px] mt-0.5 block" />
                       </div>
                     </div>
                   </div>
 
                   {/* Thumbnail / Video */}
-                  <div className="absolute inset-0">
-                    <Image
-                      src={item.thumbnail}
+                  <div className="absolute inset-0 bg-black">
+                    <EditableImage
+                      path={`videoTestimonials.items.${i}.thumbnail`}
+                      fallback={item.thumbnail}
                       alt={`${item.name} testimonial`}
                       fill
                       sizes="280px"
                       className={`object-cover transition-all duration-700 ${
                         activeVideo === item.id
-                          ? "scale-105 brightness-75"
-                          : "group-hover:scale-105"
+                          ? "opacity-0"
+                          : "opacity-100 group-hover:scale-105"
                       }`}
                     />
+                    {activeVideo === item.id && item.videoUrl && (
+                      <video
+                        src={item.videoUrl}
+                        autoPlay
+                        controls
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover z-20"
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                    )}
                   </div>
 
                   {/* Play Button */}
                   <div
                     className={`absolute inset-0 z-10 flex items-center justify-center transition-all duration-500 ${
-                      activeVideo === item.id ? "opacity-0" : "opacity-100"
+                      activeVideo === item.id ? "opacity-0 pointer-events-none" : "opacity-100"
                     }`}
                   >
                     <div className="relative">
@@ -237,7 +299,7 @@ export default function VideoTestimonialSection() {
 
                   {/* Playing State - Audio Wave Animation */}
                   {activeVideo === item.id && (
-                    <div className="absolute inset-0 z-10 flex items-center justify-center">
+                    <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
                       <div className="flex items-end gap-1 h-10">
                         {[...Array(5)].map((_, i) => (
                           <div
@@ -255,16 +317,17 @@ export default function VideoTestimonialSection() {
                   )}
 
                   {/* Bottom Gradient with Client Info */}
-                  <div className="absolute bottom-0 left-0 right-0 z-20 p-5 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                  <div className={`absolute bottom-0 left-0 right-0 z-20 p-5 bg-gradient-to-t from-black/80 via-black/50 to-transparent transition-opacity duration-500 ${activeVideo === item.id ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
                     {/* Quote */}
-                    <p className="text-white text-sm font-medium leading-snug mb-3 line-clamp-2">
-                      &quot;{item.quote}&quot;
-                    </p>
+                    <div className="text-white text-sm font-medium leading-snug mb-3 line-clamp-2 flex">
+                      &quot;<EditableText path={`videoTestimonials.items.${i}.quote`} fallback={item.quote ?? ""} className="flex-1" />&quot;
+                    </div>
                     {/* Client Info */}
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/40 relative flex-shrink-0">
-                        <Image
-                          src={item.thumbnail}
+                        <EditableImage
+                          path={`videoTestimonials.items.${i}.thumbnail`}
+                          fallback={item.thumbnail}
                           alt={item.name}
                           fill
                           sizes="36px"
@@ -272,8 +335,8 @@ export default function VideoTestimonialSection() {
                         />
                       </div>
                       <div>
-                        <p className="text-white font-semibold text-sm leading-none">{item.name}</p>
-                        <p className="text-white/60 text-xs mt-0.5">{item.location}</p>
+                        <EditableText path={`videoTestimonials.items.${i}.name`} fallback={item.name ?? ""} className="text-white font-semibold text-sm leading-none block" />
+                        <EditableText path={`videoTestimonials.items.${i}.location`} fallback={item.location ?? ""} className="text-white/60 text-xs mt-0.5 block" />
                       </div>
                     </div>
 
@@ -301,13 +364,13 @@ export default function VideoTestimonialSection() {
                     </div>
                   )}
                 </div>
-              </div>
+              </DraggableItem>
             ))}
           </div>
 
           {/* Dot Indicators */}
           <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, i) => (
+            {editableTestimonials.map((_, i) => (
               <button
                 key={i}
                 onClick={() => {
@@ -339,6 +402,6 @@ export default function VideoTestimonialSection() {
           animation: progress 15s linear forwards;
         }
       `}</style>
-    </section>
+    </EditableSection>
   );
 }
